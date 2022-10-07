@@ -18,10 +18,13 @@ class ServiceController extends Controller
     }
 
     public function addService(Request $request) 
-    {
+    {      
+           $request->validate([
+              'name' => 'required|string|max:2000'
+           ]); 
         if(!Service::where('name',$request->name)->exists()) {
             $service = new Service(); 
-            $service->name = $request->name; 
+            $service->name = strip_tags($request->name); 
             $service->save(); 
             return to_route('services')->with('statut','service created with success'); 
         } else {

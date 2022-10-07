@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('service_id'); 
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade'); 
+            $table->unsignedBigInteger('laundry_id'); 
+            $table->foreign('laundry_id')->references('id')->on('laundries')->onDelete('cascade'); 
             $table->float('price'); 
             $table->timestamps();
         });

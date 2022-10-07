@@ -58,13 +58,13 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Administration</span>
+          <span>{{ __('general.administration')}}</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Manage : </h6>
-            <a class="collapse-item" href="{{ route('services')}}">Services</a>
-            <a class="collapse-item" href="cards.html">Prices</a>
+            <a class="collapse-item" href="{{ route('services')}}">{{ __('services.services')}}</a>
+            <a class="collapse-item" href="{{ route('laundries')}}">{{__('laundries.laundries')}}</a>
           </div>
         </div>
       </li>
