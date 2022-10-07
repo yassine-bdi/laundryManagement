@@ -4666,10 +4666,10 @@ input[type="button"].btn-block {
   margin-bottom: 0.75rem;
 }
 
-@media (min-width: 576px) {
+@media (min-width: 410px) {
   .card-columns {
-    -moz-column-count: 3;
-    column-count: 3;
+    -moz-column-count: 6;
+    column-count: 6;
     -moz-column-gap: 1.25rem;
     column-gap: 1.25rem;
     orphans: 1;

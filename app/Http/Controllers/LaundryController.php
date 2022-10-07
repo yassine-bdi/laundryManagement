@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Laundry;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image; 
+
 
 class LaundryController extends Controller
 {
@@ -14,7 +16,7 @@ class LaundryController extends Controller
     
     public function Laundries() 
     {   
-        return view('admin.laundries',['laundries' => Laundry::paginate(5)]); 
+        return view('admin.laundries',['laundries' => Laundry::paginate(12)]); 
     }
 
     public function addLaundries(Request $request) 
@@ -28,6 +30,8 @@ class LaundryController extends Controller
            $laundry->name = strip_tags($request->name); 
            if($request->hasFile('image')) {
            $laundry->photo = $request->file('image')->store('laundries','public'); 
+           $image = Image::make(public_path('storage/' . $laundry->photo))->resize(300,300); 
+             $image->save(); 
            }
            $laundry->save(); 
            return to_route('laundries')->with('statut','laundry added with success'); 
@@ -48,7 +52,8 @@ class LaundryController extends Controller
            $laundry->name = strip_tags($request->name); 
            if($request->hasFile('image')) {
            $laundry->photo = $request->file('image')->store('laundries'); 
-    
+           $image = Image::make(public_path('storage/' . $laundry->photo))->fit(300,300); 
+           $image->save();
            }
              $laundry->save();   
            return to_route('laundries')->with('statut','laundry edited with success'); 

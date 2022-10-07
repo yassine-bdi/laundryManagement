@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('heading')
-  <h3 class="{{session()->has('lang_code')?(session()->get('lang_code')=='ar'?'float-right':''):''}}"> 
+  <h3 class="{{session()->has('lang_code')?(session()->get('lang_code')=='ar'?'text-center':''):''}}"> 
    {{ __('laundries.laundries')}}</h3> 
 @endsection
 @section('content')
@@ -24,8 +24,7 @@
     </div>
 @endif
     <br><br>  
-<div class="card shadow mb-4 ">
-    <div class="card-header py-3">
+
         <div class="row">
             <div class="col-sm-6 py-3">
         <a href="{{ route('addService')}}" class="btn btn-info btn-icon-split btn-sm " data-toggle="modal" data-target="#addacademy"> 
@@ -95,22 +94,23 @@
             </form>
         </div>       
     </div>
-    <div class="card-body">
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th> # </th>
-                        <th> {{ __('services.servicename')}} </th>
-                        <th> {{ __('general.actions')}}</th>
-                    </tr>
-                </thead>
-                <tbody>
+         <div class="card-columns">
+            <style>
+            .card-columns {
+           
+                  column-count: 6;
+                }
+                </style>
+                
                     @forelse($laundries as $laundry) 
-                    <tr> 
-                        <td> {{$laundry->id}} </td>
-                        <td> {{ $laundry->name }}</td>
-                        <td><a href="{{ route('editService',$laundry->id)}}" class="btn btn-info btn-circle" data-toggle="modal" data-target="#edit{{$laundry->id}}"> <i class="fa fa-pen"></i></a> 
+                     <div class="card shadow 2px 2px" >  
+                        <img  src="{{ $laundry->photo ? asset("storage/" . $laundry->photo) : asset('img/No-Image.jpeg')}}" width="100px" class="card-img-top">
+            <div class="card-body"  cellspacing="0">
+
+                  
+
+                        <h5> {{ $laundry->name }}</h5>
+                        <a href="{{ route('editService',$laundry->id)}}" class="btn btn-info btn-circle" data-toggle="modal" data-target="#edit{{$laundry->id}}"> <i class="fa fa-pen"></i></a> 
                                     <!-- The Modal -->
           <div class="modal fade" id="edit{{$laundry->id}}">
             <div class="modal-dialog">
@@ -198,17 +198,22 @@
                                   </div>
                                 </div>
                               </div>
-                    </tr>
+                             </div>
+        </div>
+            
+           
+                    
                     @empty 
                       <h2> No Laundries to display </h2>
                     @endforelse 
-                </tbody>
-            </table>
-        </div>
+              
+                     
+        </div>       
+        
       
         {{$laundries->links()}}
     
-    </div>
-</div>
-</div>
+    
+
+
 @endsection 
