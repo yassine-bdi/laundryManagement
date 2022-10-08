@@ -95,12 +95,7 @@
         </div>       
     </div>
          <div class="card-columns">
-            <style>
-            .card-columns {
-           
-                  column-count: 6;
-                }
-                </style>
+          
                 
                     @forelse($laundries as $laundry) 
                      <div class="card shadow 2px 2px" >  
@@ -214,6 +209,11 @@
         {{$laundries->links()}}
     
     
-
+  <style>
+            .card-columns {
+           
+                  column-count: 6;
+                }
+                </style>
 
 @endsection 
