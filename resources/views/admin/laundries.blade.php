@@ -105,7 +105,7 @@
                   
 
                         <h5> {{ $laundry->name }}</h5>
-                        <a href="{{ route('editService',$laundry->id)}}" class="btn btn-info btn-circle" data-toggle="modal" data-target="#edit{{$laundry->id}}"> <i class="fa fa-pen"></i></a> 
+                        <a href="{{ route('editService',$laundry->id)}}" class="btn btn-info " data-toggle="modal" data-target="#edit{{$laundry->id}}"> <i class="fa fa-pen"></i></a> 
                                     <!-- The Modal -->
           <div class="modal fade" id="edit{{$laundry->id}}">
             <div class="modal-dialog">
@@ -124,7 +124,7 @@
                   
                   <p style="padding-top: 3%">{{ __('laundries.edit')}}</p>
                   </div>
-                  <br>  <form action="{{route('editlaundries',$laundry->id)}}" method="POST">
+                  <br>  <form action="{{route('editlaundries',$laundry->id)}}" method="POST" enctype="multipart/form-data">
                     @method('PATCH')
                     @csrf
                     <div class="py-4">
@@ -136,7 +136,7 @@
                         <img class="px-3" src="{{ asset("storage/" . $laundry->photo)}}" width="120px">
                         <label> {{ __('general.image')}} </label>
                         
-                    <input type="file" name="image" capture="environment" class="form-control" accept="image/*" placeholder="{{ __('general.writehere')}}">
+                    <input type="file" name="image"  class="form-control" accept="image/*" placeholder="{{ __('general.writehere')}}">
                     </div> 
                     <button class="btn btn-success text-light"  type="submit" > 
                     {{ __('buttons.save')}}</button>
@@ -153,7 +153,7 @@
               </div>
             </div>
           </div>
-                            <button type="button" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#myModal{{$laundry->id}}">
+                            <button type="button" class="btn btn-danger " data-toggle="modal" data-target="#myModal{{$laundry->id}}">
                                 <i class="fas fa-trash"></i>
                               </button>
                               

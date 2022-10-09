@@ -36,7 +36,7 @@ class ServiceController extends Controller
     {
         if(Service::where('id',$id)->exists()) {
             $service = Service::find($id); 
-            $service->name = $request->name; 
+            $service->name = strip_tags($request->name); 
             $service->save(); 
             return to_route('services')->with('statut','service updated with success'); 
         } else {
