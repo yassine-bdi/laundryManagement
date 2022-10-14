@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Price extends Model
 {
     use HasFactory;
+
+    public function service() 
+    {
+        return $this->belongsTo(Service::class); 
+    }
+
+    public function laundry()
+    {
+        return $this->belongsTo(Laundry::class); 
+    }
+
 }

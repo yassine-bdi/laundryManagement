@@ -65,6 +65,7 @@
             <h6 class="collapse-header">Manage : </h6>
             <a class="collapse-item" href="{{ route('services')}}">{{ __('services.services')}}</a>
             <a class="collapse-item" href="{{ route('laundries')}}">{{__('laundries.laundries')}}</a>
+            <a class="collapse-item" href="{{ route('prices')}}">{{__('prices.prices')}}</a>
           </div>
         </div>
       </li>

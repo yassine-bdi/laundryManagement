@@ -9,5 +9,6 @@ return [
     'delete' => 'Delete Service',
     'deleteprompt' => 'Do you really want to delete this service?',
     'insert' => 'Insert service\'s name',
-    'services' => 'services'
+    'services' => 'services',
+    'service' => 'service'
 ]; 

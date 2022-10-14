@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\LaundryController;
+use App\Http\Controllers\PriceController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ServiceController; 
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,21 +20,28 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::controller(ServiceController::class)->group(function() {
-    Route::get('/services','Services')->name('services'); 
-    Route::post('/newservice','addService')->name('addService'); 
-    Route::patch('/serviceedit/{id}','editService')->name('editService'); 
-    Route::delete('/servicedelete/{id}','deleteService')->name('deleteService'); 
-}); 
+Route::controller(ServiceController::class)->group(function () {
+    Route::get('/services', 'Services')->name('services');
+    Route::post('/newservice', 'addService')->name('addService');
+    Route::patch('/serviceedit/{id}', 'editService')->name('editService');
+    Route::delete('/servicedelete/{id}', 'deleteService')->name('deleteService');
+});
 
-Route::controller(LaundryController::class)->group(function() {
-    Route::get('/laundries','Laundries')->name('laundries'); 
-    Route::post('/addlaundry','addLaundries')->name('addlaundry'); 
-    Route::patch('/editlaundry/{id}','editLaundries')->name('editlaundries'); 
-    Route::delete('/laundrydelete/{id}','deleteLaundry')->name('deletelaundry');
-}); 
+Route::controller(LaundryController::class)->group(function () {
+    Route::get('/laundries', 'Laundries')->name('laundries');
+    Route::post('/addlaundry', 'addLaundries')->name('addlaundry');
+    Route::patch('/editlaundry/{id}', 'editLaundries')->name('editlaundries');
+    Route::delete('/laundrydelete/{id}', 'deleteLaundry')->name('deletelaundry');
+});
 
-Route::get('/change-language/{lang}',"\App\Http\Controllers\HomeController@changeLang");
+Route::controller(priceController::class)->group(function () {
+    Route::get('/prices', 'prices')->name('prices');
+    Route::post('/addprice', 'addPrice')->name('addprice');
+    Route::patch('/editprice/{id}', 'editPrice')->name('editprice');
+    Route::delete('/pricedelete/{id}', 'deletePrice')->name('deleteprice');
+});
+
+Route::get('/change-language/{lang}', "\App\Http\Controllers\HomeController@changeLang");
 
 
 Route::get('/home', function () {

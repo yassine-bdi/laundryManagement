@@ -9,5 +9,6 @@ return [
     'delete' => 'حذف الخدمة',
     'deleteprompt' => 'هل تريد حقا حذف هذه الخدمة ؟',
     'insert' => 'أدخل إسم الخدمة',
-    'services' => 'الخدمات'
+    'services' => 'الخدمات',
+    'service' => 'الخدمة'
 ]; 
