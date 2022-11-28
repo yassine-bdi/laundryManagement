@@ -18,10 +18,12 @@ class PriceController extends Controller
     public function prices()
     {
         return view('admin.prices', [
-            'prices' => Price::paginate(5),
+            'prices' => Price::distinct()->get(),
             'services' => Service::all(),
             'laundries' => Laundry::all()
         ]);
+
+
     }
 
     public function addPrice(Request $request)

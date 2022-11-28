@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LaundryController;
 use App\Http\Controllers\PriceController;
+use App\Http\Controllers\WorkerController; 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
 
@@ -39,6 +40,13 @@ Route::controller(priceController::class)->group(function () {
     Route::post('/addprice', 'addPrice')->name('addprice');
     Route::patch('/editprice/{id}', 'editPrice')->name('editprice');
     Route::delete('/pricedelete/{id}', 'deletePrice')->name('deleteprice');
+}); 
+
+Route::controller(workerController::class)->group(function () {
+    Route::get('/workers', 'workers')->name('workers');
+    Route::post('/addworker', 'addWorker')->name('addworker');
+    Route::patch('/editworker/{id}', 'editWorker')->name('editworker');
+    /* Route::delete('/pricedelete/{id}', 'deletePrice')->name('deleteprice'); */
 });
 
 Route::get('/change-language/{lang}', "\App\Http\Controllers\HomeController@changeLang");
