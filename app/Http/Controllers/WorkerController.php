@@ -25,7 +25,8 @@ class WorkerController extends Controller
             ->with('worker')
             ->paginate(5)]);
     }
-
+    
+    
     public function addWorker(Request $request)
     {
         $request->validate([
@@ -62,13 +63,7 @@ class WorkerController extends Controller
         }
     } 
     
-    /**
-     * updateWorker
-     *
-     * @param  mixed $request
-     * @param  mixed $id
-     * @return void
-     */
+    
     public function editWorker(Request $request, $id)
     {
         $request->validate([
