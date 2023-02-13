@@ -232,7 +232,7 @@
                               
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                      <h4 class="modal-title">{{ __('prices.delete')}}</h4>
+                                      <h4 class="modal-title">{{ __('workers.delete')}}</h4>
                                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                               
@@ -241,9 +241,9 @@
                                       <div align="center">
                                       <img src="{{ asset('img/undraw_throw_away_re_x60k (1).svg')}}" style="width: 45%; height: 25%" > 
                                       
-                                      <p style="padding-top: 3%">{{ __('prices.deleteprompt')}}</p>
+                                      <p style="padding-top: 3%">{{ __('workers.deleteprompt')}}</p>
                                       </div>
-                                      <br>  <form action="{{route('deleteprice',$worker->id)}}" method="POST">
+                                      <br>  <form action="{{route('deleteworker',$worker->id)}}" method="POST">
                                         @method("DELETE")
                                         @csrf
                                         <button class="btn btn-danger text-light"  type="submit" > 

@@ -13,4 +13,8 @@ class Worker extends Model
     {
         return $this->belongsTo(User::class); 
     }
+
+    protected $casts = [
+        'age' => "integer"
+    ]; 
 }

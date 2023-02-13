@@ -46,7 +46,7 @@ Route::controller(workerController::class)->group(function () {
     Route::get('/workers', 'workers')->name('workers');
     Route::post('/addworker', 'addWorker')->name('addworker');
     Route::patch('/editworker/{id}', 'editWorker')->name('editworker');
-    /* Route::delete('/pricedelete/{id}', 'deletePrice')->name('deleteprice'); */
+    Route::delete('/workerdelete/{id}', 'deleteWorker')->name('deleteworker'); 
 });
 
 Route::get('/change-language/{lang}', "\App\Http\Controllers\HomeController@changeLang");

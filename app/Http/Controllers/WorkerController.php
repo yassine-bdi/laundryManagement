@@ -101,4 +101,18 @@ class WorkerController extends Controller
             return to_route('workers')->with('statut', 'Worker updated with success');
         }
     }
+
+
+    public function deleteWorker(Request $request,$id) 
+    {
+        if (!Worker::where('id', $id)->exists()) {
+            return back()->with('error', 'this worker does not exists!');
+        } else {           
+            $worker = Worker::find($id); 
+            $user = User::find($worker->user_id);
+            $worker->delete(); 
+            $user->delete(); 
+            return to_route('workers')->with('statut', 'Worker deleted with success');
+        }
+    }
 }

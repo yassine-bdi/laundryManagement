@@ -8,6 +8,8 @@ return [
     'mission' => 'Mission',
     'joindate' => 'Join date',
     'edit' => "Edit this worker",
+    "deleteprompt" => "Do you really want to delete this worker?",
+    "delete" => "Delete worker", 
     
 
 ]; 

@@ -18,7 +18,7 @@ class PriceController extends Controller
     public function prices()
     {
         return view('admin.prices', [
-            'prices' => Price::distinct()->get(),
+            'prices' => Price::with(['service','laundry'])->get(),
             'services' => Service::all(),
             'laundries' => Laundry::all()
         ]);
