@@ -235,7 +235,7 @@
             </table>
         </div>
       
-      
+      {{$prices->links()}}
     
     </div>
 </div>

@@ -18,7 +18,7 @@ class PriceController extends Controller
     public function prices()
     {
         return view('admin.prices', [
-            'prices' => Price::with(['service', 'laundry'])->get(),
+            'prices' => Price::with(['service', 'laundry'])->paginate(5),
             'services' => Service::all(),
             'laundries' => Laundry::all()
         ]);
