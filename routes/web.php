@@ -21,6 +21,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('/home','\App\Http\Controllers\DashboardController@home')->middleware('auth');
+
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/services', 'Services')->name('services');
     Route::post('/newservice', 'addService')->name('addService');
@@ -52,6 +55,4 @@ Route::controller(workerController::class)->group(function () {
 Route::get('/change-language/{lang}', "\App\Http\Controllers\HomeController@changeLang");
 
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware('auth');
+

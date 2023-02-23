@@ -18,12 +18,10 @@ class PriceController extends Controller
     public function prices()
     {
         return view('admin.prices', [
-            'prices' => Price::with(['service','laundry'])->get(),
+            'prices' => Price::with(['service', 'laundry'])->get(),
             'services' => Service::all(),
             'laundries' => Laundry::all()
         ]);
-
-
     }
 
     public function addPrice(Request $request)
@@ -72,7 +70,8 @@ class PriceController extends Controller
         }
     }
 
-    public function deletePrice(Request $request, int $id) {
+    public function deletePrice(Request $request, int $id)
+    {
         if (Price::where('id', $id)->exists()) {
             $price = Price::find($id);
             $price->delete();

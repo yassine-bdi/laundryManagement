@@ -25,8 +25,8 @@ class WorkerController extends Controller
             ->with('worker')
             ->paginate(5)]);
     }
-    
-    
+
+
     public function addWorker(Request $request)
     {
         $request->validate([
@@ -48,7 +48,7 @@ class WorkerController extends Controller
             $user = new User();
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->role = 'worker'; 
+            $user->role = 'worker';
             $user->password = Hash::make($request->password);
             $user->save();
             $worker = new Worker();
@@ -61,9 +61,9 @@ class WorkerController extends Controller
             $worker->save();
             return to_route('workers')->with('statut', 'Worker added with success');
         }
-    } 
-    
-    
+    }
+
+
     public function editWorker(Request $request, $id)
     {
         $request->validate([
@@ -78,12 +78,12 @@ class WorkerController extends Controller
         ]);
         if (!Worker::where('id', $id)->exists()) {
             return back()->with('error', 'this worker does not exists!');
-        } else {           
-            $worker = Worker::find($id); 
+        } else {
+            $worker = Worker::find($id);
             $user = User::find($worker->user_id);
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->role = 'worker'; 
+            $user->role = 'worker';
             $user->password = Hash::make($request->password);
             $user->save();
 
@@ -98,15 +98,15 @@ class WorkerController extends Controller
     }
 
 
-    public function deleteWorker(Request $request,$id) 
+    public function deleteWorker(Request $request, $id)
     {
         if (!Worker::where('id', $id)->exists()) {
             return back()->with('error', 'this worker does not exists!');
-        } else {           
-            $worker = Worker::find($id); 
+        } else {
+            $worker = Worker::find($id);
             $user = User::find($worker->user_id);
-            $worker->delete(); 
-            $user->delete(); 
+            $worker->delete();
+            $user->delete();
             return to_route('workers')->with('statut', 'Worker deleted with success');
         }
     }

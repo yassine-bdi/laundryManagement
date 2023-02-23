@@ -30,11 +30,16 @@ class CreateNewUser implements CreatesNewUsers
                 Rule::unique(User::class),
             ],
             'password' => $this->passwordRules(),
+            'account_type' => ['required']
         ])->validate();
+          if($input['account_type'] == "client" || $input['account_type'] == "worker") {
+              $account = $input['account_type']; 
+          } 
 
         return User::create([
             'name' => $input['name'],
             'email' => $input['email'],
+            'role' => $account,
             'password' => Hash::make($input['password']),
         ]);
     }
