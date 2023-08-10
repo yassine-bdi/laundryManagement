@@ -31,11 +31,11 @@ class LaundryController extends Controller
   public function addLaundries(LaundryRequest $request)
   {
     $validatedData = $request->validated();
-    if (!Laundry::where('name', $validatedData->name)->exists()) {
+    if (!Laundry::where('name', $validatedData['name'])->exists()) {
       $laundry = new Laundry();
-      $laundry->name = strip_tags($validatedData->name);
-      if ($validatedData->hasFile('image')) {
-        $laundry->photo = $validatedData->file('image')->store('laundries', 'public');
+      $laundry->name = strip_tags($validatedData['name']);
+      if ($request->hasFile('image')) {
+        $laundry->photo = $request->file('image')->store('laundries', 'public');
         $image = Image::make(public_path('storage/' . $laundry->photo))->resize(300, 300);
         $image->save();
       }
@@ -56,7 +56,7 @@ class LaundryController extends Controller
         File::delete('storage/' . $laundry->photo);
       }
       if ($request->hasFile('image')) {
-        $laundry->photo = $validatedData->file('image')->store('laundries', 'public');
+        $laundry->photo = $request->file('image')->store('laundries', 'public');
         $image = Image::make(public_path('storage/' . $laundry->photo))->resize(300, 300);
         $image->save();
       }
