@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PriceRequest;
 use App\Models\Laundry;
 use App\Models\Price;
 use App\Models\Service;
@@ -24,23 +25,17 @@ class PriceController extends Controller
         ]);
     }
 
-    public function addPrice(Request $request)
+    public function addPrice(PriceRequest $request)
     {
-        $request->validate([
-            'price' => 'required|numeric|min:0',
-            'laundry' => 'required',
-            'service' => 'required'
-
-        ]);
-
+        $validatedData = $request->validated(); 
         if (!Price::where([
-            ['laundry_id', $request->laundry],
-            ['service_id', $request->service],
+            ['laundry_id', $validatedData['laundry']],
+            ['service_id', $validatedData['service']],
         ])->exists()) {
             $price = new Price();
-            $price->price = $request->price;
-            $price->laundry_id = $request->laundry;
-            $price->service_id = $request->service;
+            $price->price = $validatedData['price'];
+            $price->laundry_id = $validatedData['laundry'];
+            $price->service_id = $validatedData['service'];
             $price->save();
             return to_route('prices')->with('statut', 'price added with success');
         } else {
@@ -49,20 +44,14 @@ class PriceController extends Controller
     }
 
 
-    public function editPrice(Request $request, int $id)
+    public function editPrice(PriceRequest $request, int $id)
     {
-        $request->validate([
-            'price' => 'required|numeric|min:0',
-            'laundry' => 'required',
-            'service' => 'required'
-
-        ]);
-
+        $validatedData = $request->validated(); 
         if (Price::where('id', $id)->exists()) {
             $price = Price::find($id);
-            $price->price = $request->price;
-            $price->laundry_id = $request->laundry;
-            $price->service_id = $request->service;
+            $price->price = $validatedData['price'];
+            $price->laundry_id = $validatedData['laundry'];
+            $price->service_id = $validatedData['service'];
             $price->save();
             return to_route('prices')->with('statut', 'price edited with success');
         } else {

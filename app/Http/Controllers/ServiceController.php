@@ -22,9 +22,9 @@ class ServiceController extends Controller
     {
         $validatedData = $request->validated();
 
-        if (!Service::where('name', $validatedData->name)->exists()) {
+        if (!Service::where('name', $validatedData['name'])->exists()) {
             $service = new Service();
-            $service->name = strip_tags($request->name);
+            $service->name = strip_tags($validatedData['name']);
             $service->save();
             return to_route('services')->with('statut', 'service created with success');
         } else {
@@ -37,7 +37,7 @@ class ServiceController extends Controller
         $validatedData = $request->validated(); 
         if (Service::where('id', $id)->exists()) {
             $service = Service::find($id);
-            $service->name = strip_tags($validatedData->name);
+            $service->name = strip_tags($validatedData['name']);
             $service->save();
             return to_route('services')->with('statut', 'service updated with success');
         } else {
