@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ServiceRequest;
 use Illuminate\Http\Request;
 use App\Models\Service;
 
@@ -17,12 +18,11 @@ class ServiceController extends Controller
         return view('admin.services', ['services' => Service::paginate(5)]);
     }
 
-    public function addService(Request $request)
+    public function addService(ServiceRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:2000'
-        ]);
-        if (!Service::where('name', $request->name)->exists()) {
+        $validatedData = $request->validated();
+
+        if (!Service::where('name', $validatedData->name)->exists()) {
             $service = new Service();
             $service->name = strip_tags($request->name);
             $service->save();
@@ -32,11 +32,12 @@ class ServiceController extends Controller
         }
     }
 
-    public function editService(Request $request, int $id)
-    {
+    public function editService(ServiceRequest $request, int $id)
+    {   
+        $validatedData = $request->validated(); 
         if (Service::where('id', $id)->exists()) {
             $service = Service::find($id);
-            $service->name = strip_tags($request->name);
+            $service->name = strip_tags($validatedData->name);
             $service->save();
             return to_route('services')->with('statut', 'service updated with success');
         } else {

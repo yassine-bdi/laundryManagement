@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\LaundryController;
 use App\Http\Controllers\PriceController;
-use App\Http\Controllers\WorkerController; 
+use App\Http\Controllers\WorkerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
+use App\Providers\RouteServiceProvider;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +20,11 @@ use App\Http\Controllers\ServiceController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(RouteServiceProvider::HOME);
 });
 
 
-Route::get('/home','\App\Http\Controllers\DashboardController@home')->middleware('auth');
+Route::get('/home', '\App\Http\Controllers\DashboardController@home')->middleware('auth');
 
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/services', 'Services')->name('services');
@@ -43,16 +45,21 @@ Route::controller(priceController::class)->group(function () {
     Route::post('/addprice', 'addPrice')->name('addprice');
     Route::patch('/editprice/{id}', 'editPrice')->name('editprice');
     Route::delete('/pricedelete/{id}', 'deletePrice')->name('deleteprice');
-}); 
+});
 
 Route::controller(workerController::class)->group(function () {
     Route::get('/workers', 'workers')->name('workers');
     Route::post('/addworker', 'addWorker')->name('addworker');
     Route::patch('/editworker/{id}', 'editWorker')->name('editworker');
-    Route::delete('/workerdelete/{id}', 'deleteWorker')->name('deleteworker'); 
+    Route::delete('/workerdelete/{id}', 'deleteWorker')->name('deleteworker');
 });
 
 Route::get('/change-language/{lang}', "\App\Http\Controllers\HomeController@changeLang");
 
+Route::controller(UserController::class)->group(function () {
+    Route::get('profile/{user}', 'showProfile')->name('profile');
+});
 
-
+Route::fallback(function () {
+    return view('404');
+});
