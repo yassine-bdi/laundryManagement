@@ -19,4 +19,10 @@ class Price extends Model
         return $this->belongsTo(Laundry::class); 
     }
 
+    protected $fillable = [
+        'service_id',
+        'laundry_id',
+        'price'
+    ]; 
+
 }

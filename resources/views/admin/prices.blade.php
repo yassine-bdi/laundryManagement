@@ -60,7 +60,7 @@
                     @csrf 
                     <div class="py-4">
                         <label> {{__('laundries.laundries')}} </label>
-                        <select name="laundry" class="form-control">
+                        <select name="laundry_id" class="form-control">
                             @foreach($laundries as $laundry) 
                                <option value="{{$laundry->id}}"> {{$laundry->name}} </option>
                             @endforeach 
@@ -68,7 +68,7 @@
                         </div>  
                     <div class="py-4">
                         <label> {{__('services.service')}} </label>
-                        <select name="service" class="form-control">
+                        <select name="service_id" class="form-control">
                             @foreach($services as $service) 
                                <option value="{{$service->id}}"> {{$service->name}} </option>
                             @endforeach 

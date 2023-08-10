@@ -26,8 +26,8 @@ class PriceRequest extends FormRequest
         return [
 
             'price' => 'required|numeric|min:0',
-            'laundry' => 'required',
-            'service' => 'required'
+            'laundry_id' => 'required',
+            'service_id' => 'required'
         ];
     }
 }

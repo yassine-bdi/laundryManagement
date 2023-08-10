@@ -29,14 +29,10 @@ class PriceController extends Controller
     {
         $validatedData = $request->validated(); 
         if (!Price::where([
-            ['laundry_id', $validatedData['laundry']],
-            ['service_id', $validatedData['service']],
+            ['laundry_id', $validatedData['laundry_id']],
+            ['service_id', $validatedData['service_id']],
         ])->exists()) {
-            $price = new Price();
-            $price->price = $validatedData['price'];
-            $price->laundry_id = $validatedData['laundry'];
-            $price->service_id = $validatedData['service'];
-            $price->save();
+            Price::create($validatedData); 
             return to_route('prices')->with('statut', 'price added with success');
         } else {
             return to_route('prices')->with('error', 'price already exists!');
