@@ -27,12 +27,12 @@ class PriceController extends Controller
 
     public function addPrice(PriceRequest $request)
     {
-        $validatedData = $request->validated(); 
+        $validatedData = $request->validated();
         if (!Price::where([
             ['laundry_id', $validatedData['laundry_id']],
             ['service_id', $validatedData['service_id']],
         ])->exists()) {
-            Price::create($validatedData); 
+            Price::create($validatedData);
             return to_route('prices')->with('statut', 'price added with success');
         } else {
             return to_route('prices')->with('error', 'price already exists!');
@@ -42,7 +42,7 @@ class PriceController extends Controller
 
     public function editPrice(PriceRequest $request, int $id)
     {
-        $validatedData = $request->validated(); 
+        $validatedData = $request->validated();
         if (Price::where('id', $id)->exists()) {
             $price = Price::find($id);
             $price->price = $validatedData['price'];

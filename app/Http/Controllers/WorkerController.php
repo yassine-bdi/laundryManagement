@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use App\Http\Requests\WorkerRequest;
+use Illuminate\Support\Facades\DB;
 
 class WorkerController extends Controller
 {
@@ -27,70 +29,55 @@ class WorkerController extends Controller
     }
 
 
-    public function addWorker(Request $request)
+    public function addWorker(WorkerRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|confirmed',
-            'mission' => 'required|string|max:255',
-            'salary' => 'required|max:8',
-            'joindate' => 'required|date',
-            'age' => 'required|numeric|max:99'
-
-        ]);
+        $validatedData = $request->validated();
         if (User::where([
-            ['name', $request->name],
-            ['email', $request->email]
+            ['name', $validatedData['name']],
+            ['email', $validatedData['email']]
         ])->exists()) {
             return back()->with('error', 'this worker already exists!');
         } else {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->role = 'worker';
-            $user->password = Hash::make($request->password);
-            $user->save();
-            $worker = new Worker();
-            $worker->user_id = $user->id;
-            $worker->salary = $request->salary;
-            $worker->joindate = $request->joindate;
-            $worker->age = $request->age;
-            $worker->mission = $request->mission;
-            $worker->worker_id = rand(1000, 200000);
-            $worker->save();
+            DB::transaction(function () use ($request, $validatedData) {
+                $userID = DB::table('users')->insertGetId([
+                    'name' => $validatedData['name'],
+                    'email' => $validatedData['email'],
+                    'role' => 'worker',
+                    'password' => Hash::make($request['password'])
+                ]);
+                DB::table('workers')->insert([
+                    'user_id' => $userID,
+                    'salary' => $validatedData['salary'],
+                    'joindate' => $validatedData['joindate'],
+                    'age' => $validatedData['age'],
+                    'mission' => $validatedData['mission'],
+                    'worker_id' => rand(1000, 200000),
+                ]);
+            });
             return to_route('workers')->with('statut', 'Worker added with success');
         }
     }
 
 
-    public function editWorker(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+    public function editWorker(WorkerRequest $request, $id)
+    {   
 
-            'mission' => 'required|string|max:255',
-            'salary' => 'required|max:8',
-            'joindate' => 'required|date',
-            'age' => 'required|numeric|max:99'
-
-        ]);
+        $validatedData = $request->validated(); 
         if (!Worker::where('id', $id)->exists()) {
             return back()->with('error', 'this worker does not exists!');
         } else {
             $worker = Worker::find($id);
             $user = User::find($worker->user_id);
-            $user->name = $request->name;
-            $user->email = $request->email;
+            $user->name = $validatedData['name'];
+            $user->email = $validatedData['email'];
             $user->role = 'worker';
             $user->password = Hash::make($request->password);
             $user->save();
 
-            $worker->salary = $request->salary;
-            $worker->joindate = $request->joindate;
-            $worker->age = $request->age;
-            $worker->mission = $request->mission;
+            $worker->salary = $validatedData['salary'];
+            $worker->joindate = $validatedData['joindate'];
+            $worker->age = $validatedData['age'];
+            $worker->mission = $validatedData['mission'];
 
             $worker->save();
             return to_route('workers')->with('statut', 'Worker updated with success');

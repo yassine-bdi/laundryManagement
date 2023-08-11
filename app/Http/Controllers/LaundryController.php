@@ -48,7 +48,7 @@ class LaundryController extends Controller
 
   public function editLaundries(LaundryRequest $request, int $id)
   {
-    $validatedData = $request->validated(); 
+    $validatedData = $request->validated();
     if (Laundry::where('id', $id)->exists()) {
       $laundry = Laundry::find($id);
       $laundry->name = strip_tags($validatedData->name);

@@ -33,8 +33,8 @@ class ServiceController extends Controller
     }
 
     public function editService(ServiceRequest $request, int $id)
-    {   
-        $validatedData = $request->validated(); 
+    {
+        $validatedData = $request->validated();
         if (Service::where('id', $id)->exists()) {
             $service = Service::find($id);
             $service->name = strip_tags($validatedData['name']);
