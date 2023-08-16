@@ -1,5 +1,7 @@
 @extends('layouts.master')
 @section('heading')
   <h3 class="{{session()->has('lang_code')?(session()->get('lang_code')=='ar'?'text-center':''):''}}"> 
-   {{ __('laundries.laundries')}}</h3> 
+   {{ __('commands.commands')}}</h3> 
 @endsection
+
+    

@@ -35,7 +35,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-shirt"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">{{ env('NAME')}}<sup>*</sup></div>
+                <div class="sidebar-brand-text mx-3">{{ env('NAME','')}}<sup>*</sup></div>
             </a>
 
             <!-- Divider -->
@@ -88,7 +88,7 @@
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="charts.html">
+                <a class="nav-link" href="{{ route('commands') }}">
                     <i class="fas fa-fw fa-tasks"></i>
                     <span>{{ __('commands.commands')}}</span></a>
             </li>

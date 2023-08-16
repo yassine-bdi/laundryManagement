@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommandController;
 use App\Http\Controllers\LaundryController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\WorkerController;
@@ -24,7 +25,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/home', '\App\Http\Controllers\DashboardController@home')->middleware('auth');
+Route::get('/home', '\App\Http\Controllers\DashboardController@home')->middleware(['auth', 'Language']);
 
 Route::controller(ServiceController::class)->group(function () {
     Route::get('/services', 'Services')->name('services');
@@ -53,6 +54,14 @@ Route::controller(workerController::class)->group(function () {
     Route::patch('/editworker/{id}', 'editWorker')->name('editworker');
     Route::delete('/workerdelete/{id}', 'deleteWorker')->name('deleteworker');
 });
+
+Route::controller(CommandController::class)->group(function () {
+    Route::get('/commands', 'commands')->name('commands');
+    /*Route::post('/addworker', 'addWorker')->name('addworker');
+    Route::patch('/editworker/{id}', 'editWorker')->name('editworker');
+    Route::delete('/workerdelete/{id}', 'deleteWorker')->name('deleteworker');*/
+});
+
 
 Route::get('/change-language/{lang}', "\App\Http\Controllers\HomeController@changeLang");
 

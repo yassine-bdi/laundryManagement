@@ -15,6 +15,16 @@ return new class extends Migration
     {
         Schema::create('commands', function (Blueprint $table) {
             $table->id();
+            $table->json('items'); 
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade'); 
+            $table->unsignedBigInteger('service_id'); 
+            $table->foreign('by')->references('id')->on('workers')->onDelete('cascade'); 
+            $table->unsignedBigInteger('by'); 
+            $table->unsignedDecimal('total_price'); 
+            $table->string('client')->nullable(); 
+            $table->string('delivery_address')->nullable(); 
+            $table->string('note')->nullable(); 
+            $table->date('wanted_at')->nullable(); 
             $table->timestamps();
         });
     }
