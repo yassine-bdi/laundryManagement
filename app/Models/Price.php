@@ -23,6 +23,10 @@ class Price extends Model
         'service_id',
         'laundry_id',
         'price'
-    ]; 
+    ];
+
+   
+    
+    
 
 }
