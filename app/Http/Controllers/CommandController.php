@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\newCommand as EventsNewCommand;
 use App\Models\Command;
 use App\Models\Price;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Services\newCommand; 
+use App\Services\registerCommand;
 
 class CommandController extends Controller
 {
@@ -24,8 +25,10 @@ class CommandController extends Controller
 
     public function addCommand(Request $request)
     {
-        $newCommand = new newCommand(); 
-        $newCommand->registerCommand($request); 
+        $newCommand = new registerCommand($request); 
+        $command = $newCommand->registerCommand(); 
+        EventsNewCommand::dispatch($command); 
         return back()->with('statut','command added succesfully'); 
+
     }
 }

@@ -7,16 +7,22 @@ use Illuminate\Http\Request;
 use App\Models\Price;
 use Illuminate\Support\Facades\Auth;
 
-class newCommand
+class registerCommand
 {
+    private $request;
 
-    public function registerCommand(Request $request)
+    public function __construct(Request $request)
     {
-        $items = $request->items;
+        $this->request = $request;
+    }
+
+    public function registerCommand()
+    {
+        $items = $this->request->items;
         $total_price = 0;
         foreach ($items as $item) {
             $item_service_price =  Price::where([
-                'service_id' => $request->service,
+                'service_id' => $this->request->service,
                 'laundry_id' => $item
             ])
                 ->get('price');
@@ -27,9 +33,10 @@ class newCommand
         }
         $command = new Command();
         $command->items = json_encode($items);
-        $command->service_id = $request->service;
+        $command->service_id = $this->request->service;
         $command->by = Auth::user()->id;
         $command->total_price = $total_price;
         $command->save();
+        return $command;
     }
 }
