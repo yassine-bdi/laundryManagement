@@ -25,11 +25,8 @@ class newCommand
                 $total_price += $collection_first->price;
             }
         }
-
-        $items_store_json = json_encode($items);
-
         $command = new Command();
-        $command->items = $items_store_json;
+        $command->items = json_encode($items);
         $command->service_id = $request->service;
         $command->by = Auth::user()->id;
         $command->total_price = $total_price;
