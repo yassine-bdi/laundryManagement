@@ -15,7 +15,8 @@ class newCommand
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
     
-    private $command; 
+
+    public $command; 
     /**
      * Create a new event instance.
      *

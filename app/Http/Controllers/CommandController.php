@@ -27,8 +27,8 @@ class CommandController extends Controller
     {
         $newCommand = new registerCommand($request); 
         $command = $newCommand->registerCommand(); 
-        EventsNewCommand::dispatch($command); 
-        return back()->with('statut','command added succesfully'); 
+        event(new EventsNewCommand($command)); 
+        return back()->with('statut','command added successfully'); 
 
     }
 }
