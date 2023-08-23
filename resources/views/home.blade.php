@@ -27,15 +27,16 @@
              <label class="form-check-label">  <input type="checkbox" name="items[]" class="form-check-input" value="{{$item->id}}">{{$item->name}}  </label> 
             </div>
          @endforeach
-          <div class="py-2">
-            <input type="text" name="note" class="form-control" placeholder="delivery address..">
-          </div>
-          <div class="py-2">
-            <input type="text" name="delivery_address" class="form-control" placeholder="write a note..">
-          </div>
-          <div class="py-2">
+                    <div class="py-2">
             <input type="text" name="client" class="form-control" placeholder="client's name..">
           </div>
+          <div class="py-2">
+            <input type="text" name="delivery_address" class="form-control" placeholder="delivery address..">
+          </div>
+          <div class="py-2">
+            <input type="text" name="note" class="form-control" placeholder="write a note..">
+          </div>
+
           <div class="py-2">
             <input type="submit" class="btn btn-success" value="Send">
           </div>

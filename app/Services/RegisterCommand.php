@@ -36,6 +36,9 @@ class registerCommand
         $command->service_id = $this->request->service;
         $command->by = Auth::user()->id;
         $command->total_price = $total_price;
+        $command->note = $this->request->note;
+        $command->client = $this->request->client;
+        $command->delivery_address = $this->request->delivery_address;
         $command->save();
         return $command;
     }
