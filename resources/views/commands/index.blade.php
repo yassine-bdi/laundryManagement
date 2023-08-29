@@ -4,12 +4,23 @@
         {{ __('commands.commands') }}</h3>
 @endsection
 @section('content')
+    @if (session('statut'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            {{ session('statut') }}
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            {{ session('error') }}
+        </div>
+    @endif
     <br><br>
     <div class="card shadow mb-4 ">
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-sm-6 py-3">
-                    <a href="" class="btn btn-info btn-icon-split btn-sm " data-toggle="modal" data-target="#addacademy">
+                    <a href="" class="btn btn-info btn-icon-split btn-sm " data-toggle="modal"
+                        data-target="#addacademy">
                         <span class="icon text-white-40">
                             <i class="fa fa-plus"></i>
                         </span>
@@ -82,9 +93,9 @@
                                 </div>
 
                                 <!-- Modal footer
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div> -->
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div> -->
 
                             </div>
                         </div>
@@ -147,7 +158,7 @@
                                                             <img src="{{ asset('img/undraw_throw_away_re_x60k (1).svg') }}"
                                                                 style="width: 45%; height: 25%">
 
-                                                            <p style="padding-top: 3%">{{ __('commands.deleteprompt') }}
+                                                            <p style="padding-top: 3%">{{ __('commands.delete') }}
                                                             </p>
                                                         </div>
                                                         <br>
@@ -164,9 +175,9 @@
                                                     </div>
 
                                                     <!-- Modal footer
-                                        <div class="modal-footer">
-                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                        </div> -->
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            </div> -->
 
                                                 </div>
                                             </div>

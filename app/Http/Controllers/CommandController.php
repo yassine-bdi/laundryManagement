@@ -6,6 +6,7 @@ use App\Events\newCommand as EventsNewCommand;
 use App\Http\Requests\CommandRequest;
 use App\Models\Command;
 use App\Models\Price;
+use App\Services\DeleteCommand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,5 +34,15 @@ class CommandController extends Controller
         $command = $newCommand->registerCommand();
         event(new EventsNewCommand($command));
         return back()->with('statut', 'command added successfully');
+    }
+
+    public function deleteCommand(int $id) 
+    {
+        $deletionservice = new DeleteCommand($id); 
+        if($deletionservice->deleteCommand()) {
+            return back()->with('statut','command deleted successfully'); 
+        } else {
+            return back()->with('error','command could not be deleted'); 
+        }
     }
 }
