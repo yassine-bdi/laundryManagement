@@ -58,8 +58,8 @@ Route::controller(workerController::class)->group(function () {
 Route::controller(CommandController::class)->group(function () {
     Route::get('/commands', 'commands')->name('commands');
     Route::post('/addcommand', 'addCommand')->name('addcommand');
-    /*Route::patch('/editworker/{id}', 'editWorker')->name('editworker');
-    Route::delete('/workerdelete/{id}', 'deleteWorker')->name('deleteworker');*/
+    Route::patch('/editcommand/{id}', 'editCommand')->name('editcommand');
+    Route::delete('/deletecommand/{id}', 'deleteCommand')->name('deletecommand');
 });
 
 

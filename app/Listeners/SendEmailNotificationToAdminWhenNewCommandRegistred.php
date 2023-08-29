@@ -14,11 +14,11 @@ class SendEmailNotificationToAdminWhenNewCommandRegistred implements ShouldQueue
 {
     use InteractsWithQueue;
 
-    public $tries = 10; 
+    public $tries = 10;
 
-    
 
-    
+
+
 
     /**
      * Create the event listener.
@@ -37,8 +37,8 @@ class SendEmailNotificationToAdminWhenNewCommandRegistred implements ShouldQueue
      * @return void
      */
     public function handle(newCommand $event)
-    {   
-        $user = User::find($event->command->by); 
+    {
+        $user = User::find(1);
         Mail::to($user->email)->send(new CommandNotification($event->command));
     }
 }

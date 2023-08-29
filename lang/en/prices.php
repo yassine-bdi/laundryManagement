@@ -7,4 +7,5 @@ return [
     'edit' => 'Edit this price',
     'delete' => 'Delete price',
     'deleteprompt' => 'are you sure you wanna delete this price?',
+    'totalprice' => 'Total price',
 ];  

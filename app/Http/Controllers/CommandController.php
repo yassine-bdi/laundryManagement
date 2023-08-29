@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\newCommand as EventsNewCommand;
+use App\Http\Requests\CommandRequest;
 use App\Models\Command;
 use App\Models\Price;
 use Illuminate\Http\Request;
@@ -20,15 +21,17 @@ class CommandController extends Controller
 
     public function commands()
     {
-        return view('commands.index');
+        $commands = Command::paginate(10);
+        $items = DB::table('laundries')->select(['id','name'])->get(); 
+        $services = DB::table('services')->select(['id','name'])->get(); 
+        return view('commands.index', ['commands' => $commands, 'items' => $items, 'services' => $services]);
     }
 
-    public function addCommand(Request $request)
+    public function addCommand(CommandRequest $request)
     {
-        $newCommand = new registerCommand($request); 
-        $command = $newCommand->registerCommand(); 
-        event(new EventsNewCommand($command)); 
-        return back()->with('statut','command added successfully'); 
-
+        $newCommand = new registerCommand($request);
+        $command = $newCommand->registerCommand();
+        event(new EventsNewCommand($command));
+        return back()->with('statut', 'command added successfully');
     }
 }

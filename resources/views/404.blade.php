@@ -13,7 +13,4 @@
 
     </div>
     <!-- /.container-fluid -->
-
-    
-    
 @endsection
