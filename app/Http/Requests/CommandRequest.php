@@ -27,7 +27,7 @@ class CommandRequest extends FormRequest
             "items" => "required",
             "service" => "required",
             "note" => "string|max:500",
-            "client" => "max:200",
+            "client" => "string|max:200",
             "delivery_address" => "string|max:600"
         ];
     }

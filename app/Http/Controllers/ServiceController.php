@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ServiceRequest;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use GuzzleHttp\Psr7\ServerRequest;
 
 class ServiceController extends Controller
 {
@@ -14,14 +15,14 @@ class ServiceController extends Controller
     }
 
     public function Services()
-    {
+    {   
+        
         return view('admin.services', ['services' => Service::paginate(5)]);
     }
 
     public function addService(ServiceRequest $request)
-    {
+    {   
         $validatedData = $request->validated();
-
         if (!Service::where('name', $validatedData['name'])->exists()) {
             $service = new Service();
             $service->name = strip_tags($validatedData['name']);

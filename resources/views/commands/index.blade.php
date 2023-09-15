@@ -14,6 +14,15 @@
             {{ session('error') }}
         </div>
     @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <br><br>
     <div class="card shadow mb-4 ">
         <div class="card-header py-3">
@@ -70,16 +79,19 @@
                                             </div>
                                         @endforeach
                                         <div class="py-2">
+                                            <label class="form-label"> Client's name </label>
                                             <input type="text" name="client" class="form-control"
                                                 placeholder="client's name.." value="">
                                         </div>
                                         <div class="py-2">
+                                            <label class="form-label"> Delivery address </label>
                                             <input type="text" name="delivery_address" class="form-control"
-                                                placeholder="delivery address.." value="null">
+                                                placeholder="delivery address.." value=" ">
                                         </div>
                                         <div class="py-2">
+                                            <label class="form-label"> Note </label>
                                             <input type="text" name="note" class="form-control"
-                                                placeholder="write a note.." value="null">
+                                                placeholder="write a note.." value=" ">
                                         </div>
 
                                         <div class="py-2">
@@ -93,27 +105,15 @@
                                 </div>
 
                                 <!-- Modal footer
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        </div> -->
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            </div> -->
 
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <form action="" method="POST" class="form-inline">
-                        @csrf
-                        <label> Sort by</label>
-                        &nbsp;
-                        <select class="form-control " style="width:50%" name="sortby">
-                            <option value="id"> ID </option>
-                            <option value="nom"> nom </option>
-                        </select>
-                        &nbsp;
-                        <input type="submit" class="btn btn-success " value="Trier">
-                    </form>
-                </div>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -175,9 +175,9 @@
                                                     </div>
 
                                                     <!-- Modal footer
-                                            <div class="modal-footer">
-                                              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            </div> -->
+                                                <div class="modal-footer">
+                                                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                </div> -->
 
                                                 </div>
                                             </div>

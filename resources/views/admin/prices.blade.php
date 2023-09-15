@@ -100,19 +100,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <form action="" method="POST" class="form-inline">
-                        @csrf
-                        <label> Sort by</label>
-                        &nbsp;
-                        <select class="form-control " style="width:50%" name="sortby">
-                            <option value="id"> ID </option>
-                            <option value="nom"> nom </option>
-                        </select>
-                        &nbsp;
-                        <input type="submit" class="btn btn-success " value="Trier">
-                    </form>
-                </div>
+              
             </div>
             <div class="card-body">
                 <div class="table-responsive">

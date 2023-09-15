@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css')}}" rel="stylesheet">
+    @livewireStyles
 
 </head>
 
@@ -253,12 +254,14 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js')}}"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
         function changeLanguage(lang) {
             window.location = '{{ url('change-language') }}/' + lang;
         }
     </script>
+     @livewireScripts
 
 </body>
 

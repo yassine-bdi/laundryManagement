@@ -40,8 +40,8 @@ class WorkerController extends Controller
         } else {
             DB::transaction(function () use ($request, $validatedData) {
                 $userID = DB::table('users')->insertGetId([
-                    'name' => $validatedData['name'],
-                    'email' => $validatedData['email'],
+                    'name' => strip_tags($validatedData['name']),
+                    'email' => strip_tags($validatedData['email']),
                     'role' => 'worker',
                     'password' => Hash::make($request['password'])
                 ]);
@@ -50,7 +50,7 @@ class WorkerController extends Controller
                     'salary' => $validatedData['salary'],
                     'joindate' => $validatedData['joindate'],
                     'age' => $validatedData['age'],
-                    'mission' => $validatedData['mission'],
+                    'mission' => strip_tags($validatedData['mission']),
                     'worker_id' => rand(1000, 200000),
                 ]);
             });
@@ -68,8 +68,8 @@ class WorkerController extends Controller
         } else {
             $worker = Worker::find($id);
             $user = User::find($worker->user_id);
-            $user->name = $validatedData['name'];
-            $user->email = $validatedData['email'];
+            $user->name = strip_tags($validatedData['name']);
+            $user->email = strip_tags($validatedData['email']);
             $user->role = 'worker';
             $user->password = Hash::make($request->password);
             $user->save();
@@ -77,7 +77,7 @@ class WorkerController extends Controller
             $worker->salary = $validatedData['salary'];
             $worker->joindate = $validatedData['joindate'];
             $worker->age = $validatedData['age'];
-            $worker->mission = $validatedData['mission'];
+            $worker->mission = strip_tags($validatedData['mission']);
 
             $worker->save();
             return to_route('workers')->with('statut', 'Worker updated with success');

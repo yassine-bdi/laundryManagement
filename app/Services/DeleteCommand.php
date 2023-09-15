@@ -15,16 +15,16 @@ class DeleteCommand
 
     public function __construct(int $command)
     {
-        $this->command = $command; 
+        $this->command = $command;
     }
 
-    public function deleteCommand() : Bool
+    public function deleteCommand(): Bool
     {
-       if(Command::where('id', $this->command)->exists()) {
-           $commandToDelete = Command::find($this->command); 
-           $commandToDelete->delete(); 
-           return true; 
-       }
-       return false; 
+        if (Command::where('id', $this->command)->exists()) {
+            $commandToDelete = Command::find($this->command);
+            $commandToDelete->delete();
+            return true;
+        }
+        return false;
     }
 }
