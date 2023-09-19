@@ -11,17 +11,17 @@ use Illuminate\Support\Facades\DB;
 class AddCommand extends Component
 {
     public $service;
-    public $items = array(); 
-    public $client;  
-    public $note; 
-    public $delivery_address; 
+    public $items = array();
+    public $client;
+    public $note;
+    public $delivery_address;
 
-    protected function rules()
+    protected function rules(): array
     {
-        return (new CommandRequest())->rules();
+        return (new CommandRequest())->rules(); 
     }
 
-    public function updated($client) 
+    public function updated($client)
     {
         $this->validateOnly($client);
     }
@@ -33,12 +33,11 @@ class AddCommand extends Component
         return view('livewire.add-command', ['itemsload' => $itemsload, 'services' => $servicesload]);
     }
 
-    public function submit() 
+    public function submit()
     {
         $newCommand = new registerCommand($this->validate());
         $command = $newCommand->registerCommand();
         event(new newCommand($command));
         session()->flash('message', 'Post successfully updated.');
-
     }
 }

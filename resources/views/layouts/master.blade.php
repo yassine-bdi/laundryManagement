@@ -188,6 +188,7 @@
 
                     <!-- Page Heading -->
                     @yield('heading')
+                    
                 </div>
                 <!-- /.container-fluid -->
                 <div class="container-fluid">
