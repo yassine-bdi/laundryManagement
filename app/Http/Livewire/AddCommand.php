@@ -18,12 +18,12 @@ class AddCommand extends Component
 
     protected function rules(): array
     {
-        return (new CommandRequest())->rules(); 
+        return (new CommandRequest())->rules();
     }
 
     public function updated($client)
     {
-        $this->validateOnly($client);
+        $this->validateOnly($client, ['client' => 'string|min:3|max:2000']);
     }
 
     public function render()
@@ -38,6 +38,6 @@ class AddCommand extends Component
         $newCommand = new registerCommand($this->validate());
         $command = $newCommand->registerCommand();
         event(new newCommand($command));
-        session()->flash('message', 'Post successfully updated.');
+        session()->flash('message', 'Command added with success');
     }
 }
